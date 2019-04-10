@@ -1,0 +1,377 @@
+@prefix : <http://www.semanticweb.org/asset/> .
+@prefix asset: <http://www.semanticweb.org/asset/> .
+@prefix fso: <http://www.semanticweb.org/functional-system-ontology/> .
+@prefix lis: <http://standards.iso.org/iso/15926/part14/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix fmea: <http://www.semanticweb.org/fmea-iso/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@base <http://www.semanticweb.org/asset> .
+
+<http://www.semanticweb.org/asset> rdf:type owl:Ontology ;
+                                    owl:imports <http://www.semanticweb.org/fmea-iso> .
+
+#################################################################
+#    Classes
+#################################################################
+
+:FailureDueToOvercurrent a owl:Class ; rdfs:subClassOf fmea:FailureEvent .
+:FailureDueToShortCircuit a owl:Class ; rdfs:subClassOf fmea:FailureEvent .
+:FailureDueToEarthFault a owl:Class ; rdfs:subClassOf fmea:FailureEvent .
+
+:ObservationOfOvercurrent a owl:Class ; rdfs:subClassOf fmea:FailureModeObservation ;
+rdfs:comment "'Observation of over current' is a subclass of 'FailureModeObservation'. It refers to the 'Failure Mode' column of row 20.1.1 in Table 2." ;
+.
+:ObservationOfShortCircuit a owl:Class ; rdfs:subClassOf fmea:FailureModeObservation ;
+rdfs:comment "'Observation of short circuit' is a subclass of 'FailureModeObservation'. It refers to the 'Failure Mode' column of row 20.1.1 in Table 2." ;
+.
+:ObservationOfEarthFault a owl:Class ; rdfs:subClassOf fmea:FailureModeObservation ;
+rdfs:comment "'Observation of earth fault' is a subclass of 'FailureModeObservation'. It refers to the 'Failure Mode' column of row 20.1.1 in Table 2." ;
+.
+
+###  http://www.semanticweb.org/asset/Chamber
+:Chamber rdf:type owl:Class ;
+         rdfs:subClassOf fso:Component ;
+         rdfs:label "Chamber" .
+
+
+###  http://www.semanticweb.org/asset/CollectionChamber
+:CollectionChamber rdf:type owl:Class ;
+                   rdfs:subClassOf :Chamber ;
+                   rdfs:label "Collection chamber" .
+
+
+###  http://www.semanticweb.org/asset/CondensateSystem
+:CondensateSystem rdf:type owl:Class ;
+                  rdfs:subClassOf lis:System ;
+                  rdfs:label "Condensate System" .
+
+
+###  http://www.semanticweb.org/asset/CoolingDoor
+:CoolingDoor rdf:type owl:Class ;
+             rdfs:subClassOf fso:Component ;
+             rdfs:label "Cooling door" .
+
+
+###  http://www.semanticweb.org/asset/DrainPipe
+:DrainPipe rdf:type owl:Class ;
+           rdfs:subClassOf fso:Component ;
+           rdfs:label "Drain pipe" .
+
+
+###  http://www.semanticweb.org/asset/EmergencyDoorsSystem
+:EmergencyDoorsSystem rdf:type owl:Class ;
+                      rdfs:subClassOf lis:System ;
+                      rdfs:label "Emergency Doors System" .
+
+
+###  http://www.semanticweb.org/asset/Fan
+:Fan rdf:type owl:Class ;
+     rdfs:subClassOf fso:Component ;
+     rdfs:label "Fan" .
+
+
+###  http://www.semanticweb.org/asset/Filter
+:Filter rdf:type owl:Class ;
+        rdfs:subClassOf fso:Component ;
+        rdfs:label "Filter " .
+
+
+###  http://www.semanticweb.org/asset/HeatExchanger
+:HeatExchanger rdf:type owl:Class ;
+               rdfs:subClassOf fso:Component ;
+               rdfs:label "Heat exchanger" .
+
+
+###  http://www.semanticweb.org/asset/Heater
+:Heater rdf:type owl:Class ;
+        rdfs:subClassOf fso:Component ;
+        rdfs:label "Heater" .
+
+
+###  http://www.semanticweb.org/asset/HeaterSystem
+:HeaterSystem rdf:type owl:Class ;
+              rdfs:subClassOf lis:System ;
+              rdfs:label "Heater System" .
+
+
+###  http://www.semanticweb.org/asset/HeatingAttemptAndNoHeat
+:HeatingAttemptAndNoHeat rdf:type owl:Class ;
+                         rdfs:subClassOf fmea:FailureEffect ,
+                                         :HeatingProcess ;
+                         rdfs:label "Heating attempt and no heat" .
+
+
+###  http://www.semanticweb.org/asset/HeatingAttemptAndPartialHeat
+:HeatingAttemptAndPartialHeat rdf:type owl:Class ;
+                              rdfs:subClassOf fmea:FailureEffect , :HeatingProcess ;
+                              rdfs:label "Heating attempt and partial heat" .
+
+
+###  http://www.semanticweb.org/asset/HeatingProcess
+:HeatingProcess rdf:type owl:Class ;
+                rdfs:subClassOf fso:Process ;
+                rdfs:label "Heating Process" .
+
+
+###  http://www.semanticweb.org/asset/LeakageSystem
+:LeakageSystem rdf:type owl:Class ;
+               rdfs:subClassOf lis:System ;
+               rdfs:label "Leakage System" .
+
+
+###  http://www.semanticweb.org/asset/Sump
+:Sump rdf:type owl:Class ;
+      rdfs:subClassOf fso:Component ;
+      rdfs:label "Sump" .
+
+
+###  http://www.semanticweb.org/asset/TerminalBoxCables
+:TerminalBoxCables rdf:type owl:Class ;
+                   rdfs:subClassOf fso:Component ;
+                   rdfs:label "Terminal box & cables" .
+
+
+###  http://www.semanticweb.org/asset/VentilationSystem
+:VentilationSystem rdf:type owl:Class ;
+                   rdfs:subClassOf lis:System ;
+                   rdfs:label "Ventilation System" .
+
+
+#################################################################
+#    Individuals
+#################################################################
+
+###  http://www.semanticweb.org/asset/air_water_heat_exchanger
+:air_water_heat_exchanger rdf:type owl:NamedIndividual ,
+                                        :HeatExchanger ;
+                                        rdfs:comment "'Air / water heat exchanger' is an individual from Class 'Heat exchanger'. It is represented as element 20.2.2 in Figure 1. It is a subsystem to the ‘Ventilation and cooling system'" ;
+                                        rdfs:label "Air / water heat exchanger" .
+
+
+###  http://www.semanticweb.org/asset/condensate_drain_pipe
+:condensate_drain_pipe rdf:type owl:NamedIndividual ,
+                                :DrainPipe ;
+                                rdfs:comment "'Condensate drain pipes (small bore)' is an individual from Class 'Drain pipe'. It is represented as element 20.4.1 in Figure 1. It is a subsystem to the ‘Condensate / cooling-water drain system'" ;
+                                rdfs:label "Condensate drain pipes (small bore)" .
+
+
+###  http://www.semanticweb.org/asset/condensate_drain_system
+:condensate_drain_system rdf:type owl:NamedIndividual ,
+                                  :CondensateSystem ;
+                            rdfs:comment "'Condensate / cooling-water drain system' is an individual from Class 'Condensate system'. It is represented as element 20.4 in Figure 1. It is a subsystem to the ‘Enclosure heating, ventilation and cooling system'" ;
+                            rdfs:label "Condensate / cooling-water drain system" ;
+                         lis:hasFunctionalPart :condensate_drain_pipe ,
+                                               :leak_detection_chamber ,
+                                               :leakage_collection_area ,
+                                               :leakage_drain_pipe ,
+                                               :leakage_drain_pipe_from_leak_detect_chamber ,
+                                               :sump .
+
+
+###  http://www.semanticweb.org/asset/emergency_cooling_doors
+:emergency_cooling_doors rdf:type owl:NamedIndividual ,
+                                    :CoolingDoor ;
+                                    rdfs:comment "'Emergency cooling (inlet / outlet) doors' is an individual from Class 'Cooling door'. It is represented as element 20.3 in Figure 1. It is a subsystem to the ‘Enclosure heating, ventilation and cooling system'" ;
+                                    rdfs:label "Emergency cooling (inlet / outlet) doors" .
+
+
+###  http://www.semanticweb.org/asset/fans_and_fan_hubs
+:fans_and_fan_hubs rdf:type owl:NamedIndividual ,
+                                :VentilationSystem ;
+                                rdfs:comment "'Fans and fan hubs' is an individual from Class 'Ventilation system'. It is represented as element 20.2.1 in Figure 1. It is a subsystem to the ‘Ventilation and cooling system'" ;
+                                rdfs:label "Fans and fan hubs" .
+
+
+###  http://www.semanticweb.org/asset/heater_system
+:heater_system rdf:type owl:NamedIndividual ,
+                        :HeaterSystem ;
+                        rdfs:comment "'Heater system' is an individual from Class 'Heater system'. It is represented as element 20.1 in Figure 1. It is a subsystem to the ‘Enclosure heating, ventilation and cooling system'" ;
+                        rdfs:label "Heater system" ;
+                        lis:hasFunctionalPart :heaters .
+
+
+###  http://www.semanticweb.org/asset/heater_terminal_box
+:heater_terminal_box rdf:type owl:NamedIndividual ,
+                                :TerminalBoxCables ;
+                                rdfs:comment "'Heater terminal box, terminals / cables' is an individual from Class 'Terminal box cables'. It is represented as element 20.1.2 in Figure 1. It is a subsystem to the ‘Heater System'" ;
+                                rdfs:label "Heater terminal box, terminals / cables" .
+
+
+###  http://www.semanticweb.org/asset/leak_detection_chamber
+:leak_detection_chamber rdf:type owl:NamedIndividual ,
+                                    :Chamber ;
+                                    rdfs:comment "'Leak detection chamber' is an individual from Class 'Chamber'. It is represented as element 20.4.5 in Figure 1. It is a subsystem to the ‘Condensate / cooling-water drain system'" ;
+                                    rdfs:label "Leak detection chamber" .
+
+
+###  http://www.semanticweb.org/asset/leakage_collection_area
+:leakage_collection_area rdf:type owl:NamedIndividual ,
+                                        :CollectionChamber ;
+                                        rdfs:comment "'Leakage collection area' is an individual from Class 'Collection Chamber'. It is represented as element 20.4.6 in Figure 1. It is a subsystem to the ‘Condensate / cooling-water drain system'" ;
+                                        rdfs:label "Leakage collection area" .
+
+
+###  http://www.semanticweb.org/asset/leakage_drain_pipe
+:leakage_drain_pipe rdf:type owl:NamedIndividual ,
+                                :DrainPipe ;
+                                rdfs:comment "'Condensate / leakage drain pipes' is an individual from Class 'Drain pipe'. It is represented as element 20.4.2 in Figure 1. It is a subsystem to the ‘Condensate / cooling-water drain system'" ;
+                                rdfs:label "Condensate / leakage drain pipes" .
+
+
+###  http://www.semanticweb.org/asset/leakage_drain_pipe_from_leak_detect_chamber
+:leakage_drain_pipe_from_leak_detect_chamber rdf:type owl:NamedIndividual ,
+                                                :DrainPipe ;
+                                                rdfs:comment "'Leakage drain pipe from leak detect chamber' is an individual from Class 'Drain pipe'. It is represented as element 20.4.3 in Figure 1. It is a subsystem to the ‘Condensate / cooling-water drain system'" ;
+                                                rdfs:label "Leakage drain pipe from leak detect chamber" .
+
+
+###  http://www.semanticweb.org/asset/plastic_foam_air_filters
+:plastic_foam_air_filters rdf:type owl:NamedIndividual ,
+                                        :Filter ;
+                                        rdfs:comment "'Plastic foam air filters' is an individual from Class 'Filter'. It is represented as element 20.2.3 in Figure 1. It is a subsystem to the ‘Ventilation and cooling system'" ;
+                                        rdfs:label "Plastic foam air filters" .
+
+
+###  http://www.semanticweb.org/asset/a_sump
+:sump rdf:type owl:NamedIndividual ,
+                :Sump ;
+                rdfs:comment "'sump' is an individual from Class 'Sump'. It is represented as element 20.4.4 in Figure 1. It is a subsystem to the ‘Condensate / cooling-water drain system'" ;
+                rdfs:label "sump" .
+
+
+###  http://www.semanticweb.org/asset/ventilation_and_cooling_system
+:ventilation_and_cooling_system rdf:type owl:NamedIndividual ,
+                                         :VentilationSystem ;
+                                rdfs:comment "'Ventilation and cooling system' is an individual from Class 'Ventilation system'. It is represented as element 20.2 in Figure 1. It is a subsystem to the ‘Enclosure heating, ventilation and cooling system'" ;
+                                rdfs:label "Ventilation and cooling system" ;
+                                lis:hasFunctionalPart :air_water_heat_exchanger ,
+                                                      :fans_and_fan_hubs ,
+                                                      :plastic_foam_air_filters .
+
+
+###  http://www.semanticweb.org/functional-system-ontology/enclosure_heating_ventilation_and_cooling_system
+:enclosure_heating_ventilation_and_cooling_system rdf:type owl:NamedIndividual ,
+    fso:AncillarySystem
+    ; rdfs:label "Enclosure heating, ventilation and cooling system" ;
+    rdfs:comment "'Enclosure heating, ventilation and cooling system' is an individual from Class 'AncillarySystem'. It is represented as element 20 in Figure 1." ;
+    lis:hasFunctionalPart :heater_system, :ventilation_and_cooling_system, :emergency_cooling_doors, :condensate_drain_system
+    .
+
+
+###  http://www.semanticweb.org/functional-system-ontology/failure_effect_of_reduced_heating
+:failure_effect_of_reduced_heating rdf:type owl:NamedIndividual ,
+                                :HeatingAttemptAndPartialHeat ,
+                                fmea:FailureEffect ;
+                       rdfs:label "Failure effect of reduced heating" ;
+rdfs:comment "'Failure effect of reduced heating' is an individual of class 'Failure effect'. It refers to the 'Failure Effect' column of row 20.1.1 in Table 2."  ;
+                       rdfs:seeAlso "Initial Failure Effect"^^xsd:string .
+
+###  http://www.semanticweb.org/functional-system-ontology/failure_effect_of_loss_of_all_heating
+:failure_effect_of_loss_of_all_heating rdf:type owl:NamedIndividual ,
+                            :HeatingAttemptAndPartialHeat ,
+                            fmea:FailureEffect ;
+                            rdfs:label "Failure effect loss of all heating" ;
+                            rdfs:comment "'Failure effect loss of all heating' is an individual of class 'Failure effect'. It refers to the 'Failure Effect' column of row 20.1.1 in Table 2."  ;
+                            rdfs:seeAlso "Initial Failure Effect"^^xsd:string .
+
+###  http://www.semanticweb.org/functional-system-ontology/failure_event_due_to_heaters_overcurrent
+:failure_event_due_to_heaters_overcurrent rdf:type owl:NamedIndividual ,
+                        :FailureDueToOvercurrent ;
+                        rdfs:label "heaters overcurrent failure event" ;
+                        rdfs:comment "'heaters overcurrent failure event' is an individual of class 'FailureDueToOvercurrent'."  ;
+                        lis:hasParticipant :heaters ;
+                        fmea:resultsIn :functional_failure_of_not_heating_enclosure .
+
+###  http://www.semanticweb.org/functional-system-ontology/observation_of_over_current_due_to_burnt_out_heater
+:observation_of_over_current_due_to_burnt_out_heater rdf:type owl:NamedIndividual ,
+                                          fmea:ObservationOfOvercurrent ;
+                                 rdfs:comment "'Observation of over current due to burnt out heater' is an individual of class 'Failure mode observation'. It refers to the 'Failure Mode' column of row 20.1.1 in Table 2." ;
+                                 rdfs:label "Observation of over current due to burnt out heater" .
+
+# ###  http://www.semanticweb.org/functional-system-ontology/observation_of_short_circuit
+# :observation_of_short_circuit rdf:type owl:NamedIndividual ,
+#                                 fmea:FailureModeObservation ;
+#                                 rdfs:comment "'Observation of short circuit' is an individual of class 'Failure mode observation'. It refers to the 'Failure Mode' column of row 20.1.1 in Table 2." ;
+#                                 rdfs:label "Observation of over short circuit" .
+
+# ###  http://www.semanticweb.org/functional-system-ontology/observation_of_earth_fault_due_to_insulation_break_down
+# :observation_of_earth_fault_due_to_insulation_break_down rdf:type owl:NamedIndividual ,
+#                                 fmea:FailureModeObservation ;
+#                                 rdfs:comment "'Observation of earth fault due to insulation break down' is an individual of class 'Failure mode observation'. It refers to the 'Failure Mode' column of row 20.1.1 in Table 2." ;
+#                                 rdfs:label "Observation of earth fault due to insulation break down" .
+
+###  http://www.semanticweb.org/functional-system-ontology/final_failure_effect
+:final_failure_effect rdf:type owl:NamedIndividual ,
+                                  :HeatingAttemptAndPartialHeat ,
+                                  fmea:FinalFailureEffect ;
+                         rdfs:comment "Reduced heating"^^xsd:string ;
+                         rdfs:seeAlso "Final Failure Effect"^^xsd:string .
+
+
+###  http://www.semanticweb.org/functional-system-ontology/heating_function
+:heating_function rdf:type owl:NamedIndividual ,
+                          lis:Function ;
+                 lis:realizedIn :heating_process ;
+                 rdfs:label "Heating function";
+                 rdfs:comment "'Heating function' is an individual of class 'Function'. It refers to the 'Function' column of row 20.1.1 in Table 2." , "To heat up enclosure" .
+
+
+###  http://www.semanticweb.org/functional-system-ontology/functional_failure_of_not_heating_enclosure
+:functional_failure_of_not_heating_enclosure rdf:type owl:NamedIndividual ,
+                                    fmea:FunctionalFailure ;
+                           rdfs:label "Functional failure of not heating enclosure" ;
+                           rdfs:comment "'Functional failure of not heating enclosure' is an individual of class 'FunctionalFailure'."  ;
+                           lis:representedBy :observation_of_over_current_due_to_burnt_out_heater ;
+                           # lis:representedBy :observation_of_short_circuit ;
+                           # lis:representedBy :observation_of_earth_fault_due_to_insulation_break_down ;
+                           fmea:resultsIn :failure_effect_of_reduced_heating .
+
+
+###  http://www.semanticweb.org/functional-system-ontology/the_heaters
+:heaters rdf:type owl:NamedIndividual ,
+                     :Heater ;
+                    rdfs:comment "'heaters' is an individual from Class 'Heater'. It is represented as element 20.1.1 in Figure 1. It is a subsystem to the ‘Heater System'" ;
+                    rdfs:label "heaters" ;
+            fmea:hasMalfunction :malfunction_due_to_short_circuit, :malfunction_due_to_over_current, :malfunction_due_to_earth_fault .
+
+
+###  http://www.semanticweb.org/functional-system-ontology/malfunction_due_to_short_circuit
+:malfunction_due_to_short_circuit  rdf:type owl:NamedIndividual ,
+                             fmea:Malfunction ;
+                    rdfs:label "heaters malfunction due to short circuit";
+                    rdfs:comment "The disposition to not heat up the enclosure" ;
+                    rdfs:comment "'Malfuction due to short circuit' is an individual of class 'Malfunction'."  .
+
+
+###  http://www.semanticweb.org/functional-system-ontology/malfunction_due_to_over_current
+:malfunction_due_to_over_current  rdf:type owl:NamedIndividual ,
+                                fmea:Malfunction ;
+                                lis:realizedIn :failure_event_due_to_heaters_overcurrent ;
+                                rdfs:label "heaters malfunction due to over current";
+                                rdfs:comment "A disposition to only partially heat up the enclosure" ;
+                                rdfs:comment "'Malfuction due to over current' is an individual of class 'Malfunction'."  .
+
+
+##  http://www.semanticweb.org/functional-system-ontology/malfunction_due_to_earth_fault
+:malfunction_due_to_earth_fault  rdf:type owl:NamedIndividual ,
+                                 fmea:Malfunction ; 
+                                 rdfs:label "heaters malfunction due to earth fault";
+                                 rdfs:comment "The disposition to not heat up the enclosure" ;
+                                 rdfs:comment "'Malfuction due to earth fault' is an individual of class 'Malfunction'."  .
+
+###  http://www.semanticweb.org/functional-system-ontology/heating_process
+:heating_process rdf:type owl:NamedIndividual ,
+                         :HeatingProcess ;
+                lis:hasParticipant :heaters ;
+                rdfs:label "Heating process" ;
+                rdfs:comment "'Heating process' is an individual of class 'HeatingProcess'."  .
+
+
+###  Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi
+
+
+
+

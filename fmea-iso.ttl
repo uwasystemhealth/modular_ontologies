@@ -1,0 +1,199 @@
+@prefix : <http://www.semanticweb.org/fmea-iso/> .
+@prefix fso: <http://www.semanticweb.org/functional-system-ontology/> .
+@prefix lis: <http://standards.iso.org/iso/15926/part14/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix asset: <http://www.semanticweb.org/asset/> .
+
+<http://www.semanticweb.org/fmea-iso> a owl:Ontology ;
+	owl:imports <http://www.semanticweb.org/functional-system-ontology> .
+# 
+# 
+# #################################################################
+# #
+# #    Object Properties
+# #
+# #################################################################
+# 
+# 
+# http://www.semanticweb.org/fmea-iso/hasMalfunction
+
+:hasMalfunction a owl:ObjectProperty ;
+	rdfs:subPropertyOf lis:hasDisposition ;
+	rdfs:domain lis:FunctionalObject ;
+	rdfs:range :Malfunction .
+# 
+# http://www.semanticweb.org/fmea-iso/resultsIn
+
+:resultsIn a owl:ObjectProperty ;
+	rdfs:subPropertyOf lis:causes ;
+	a owl:TransitiveProperty ;
+	rdfs:comment "A transitive subclass of \"LCI: causes\"." ;
+	rdfs:label "resultsIn" .
+# 
+# 
+# 
+# #################################################################
+# #
+# #    Classes
+# #
+# #################################################################
+# 
+# 
+# http://www.semanticweb.org/fmea-iso/ComponentFunction
+
+:ComponentFunction a owl:Class ;
+	owl:equivalentClass _:genid1 .
+
+_:genid1 owl:intersectionOf _:genid4 .
+
+_:genid4 a rdf:List ;
+	rdf:first lis:Function ;
+	rdf:rest _:genid2 .
+
+_:genid2 a rdf:List ;
+	rdf:first _:genid3 .
+
+_:genid3 a owl:Restriction ;
+	owl:onProperty lis:realizedIn ;
+	owl:someValuesFrom fso:Process .
+
+_:genid2 rdf:rest rdf:nil .
+
+_:genid1 a owl:Class .
+
+:ComponentFunction rdfs:label "Component Function" .
+# 
+# http://www.semanticweb.org/fmea-iso/FailureEffect
+
+:FailureEffect a owl:Class ;
+	rdfs:subClassOf fso:Process ;
+	rdfs:comment "Consequence of a failure mode in terms of operations, function or statusof the item (IEC 60812:2006)" ;
+	rdfs:label "FailureEffect" .
+# 
+# http://www.semanticweb.org/fmea-iso/FailureEvent
+
+:FailureEvent a owl:Class ;
+	owl:equivalentClass _:genid5 .
+
+_:genid5 owl:intersectionOf _:genid8 .
+
+_:genid8 a rdf:List ;
+	rdf:first _:genid9 .
+
+_:genid9 a owl:Restriction ;
+	owl:onProperty lis:hasParticipant ;
+	owl:someValuesFrom fso:Component .
+
+_:genid8 rdf:rest _:genid6 .
+
+_:genid6 a rdf:List ;
+	rdf:first _:genid7 .
+
+_:genid7 a owl:Restriction ;
+	owl:onProperty :resultsIn ;
+	owl:someValuesFrom :FunctionalFailure .
+
+_:genid6 rdf:rest rdf:nil .
+
+_:genid5 a owl:Class .
+
+:FailureEvent rdfs:subClassOf fso:Process ;
+	rdfs:label "FailureEvent" .
+# 
+# http://www.semanticweb.org/fmea-iso/FailureModeObservation
+
+:FailureModeObservation a owl:Class ;
+	rdfs:subClassOf lis:InformationObject ;
+	rdfs:label "FailureModeObservation" .
+# 
+# http://www.semanticweb.org/fmea-iso/FinalFailureEffect
+
+:FinalFailureEffect a owl:Class ;
+	rdfs:subClassOf :FailureEffect ;
+	rdfs:label "Final Failure Effect" .
+# 
+# http://www.semanticweb.org/fmea-iso/FunctionalFailure
+
+:FunctionalFailure a owl:Class ;
+	owl:equivalentClass _:genid10 .
+
+_:genid10 owl:intersectionOf _:genid13 .
+
+_:genid13 a rdf:List ;
+	rdf:first _:genid14 .
+
+_:genid14 a owl:Restriction ;
+	owl:onProperty lis:representedBy ;
+	owl:someValuesFrom :FailureModeObservation .
+
+_:genid13 rdf:rest _:genid11 .
+
+_:genid11 a rdf:List ;
+	rdf:first _:genid12 .
+
+_:genid12 a owl:Restriction ;
+	owl:onProperty :resultsIn ;
+	owl:someValuesFrom :FailureEffect .
+
+_:genid11 rdf:rest rdf:nil .
+
+_:genid10 a owl:Class .
+
+:FunctionalFailure rdfs:subClassOf fso:Process ;
+	rdfs:label "FunctionalFailure" .
+# 
+# http://www.semanticweb.org/fmea-iso/Malfunction
+
+:Malfunction a owl:Class ;
+	rdfs:subClassOf lis:Disposition , _:genid15 .
+
+_:genid15 a owl:Restriction ;
+	owl:onProperty lis:realizedIn ;
+	owl:allValuesFrom :FailureEvent .
+
+:Malfunction rdfs:label "Malfunction" .
+# 
+# http://www.semanticweb.org/fmea-iso/ObjectInFaultState
+
+:ObjectInFaultState a owl:Class ;
+	rdfs:subClassOf lis:FunctionalObject ;
+	rdfs:comment "After failure the item has a fault. Failure is an event as distinguished from fault which is a state" ;
+	rdfs:label "Object in Fault State" .
+# 
+# http://www.semanticweb.org/fmea-iso/PrimaryFunction
+
+:PrimaryFunction a owl:Class ;
+	rdfs:subClassOf :ComponentFunction ;
+	rdfs:label "PrimaryFunction" .
+# 
+# 
+# 
+# #################################################################
+# #
+# #    General axioms
+# #
+# #################################################################
+# 
+# 
+
+_:genid16 a owl:Restriction ;
+	owl:onProperty lis:hasFunctionalPart ;
+	owl:someValuesFrom :ObjectInFaultState ;
+	rdfs:subClassOf :ObjectInFaultState .
+# 
+
+_:genid17 a owl:Restriction ;
+	owl:onProperty :hasMalfunction ;
+	owl:someValuesFrom _:genid18 .
+
+_:genid18 a owl:Restriction ;
+	owl:onProperty lis:realizedIn ;
+	owl:someValuesFrom owl:Thing .
+
+_:genid17 rdfs:subClassOf :ObjectInFaultState .
+# 
+# Generated by the OWL API (version 4.2.5.20160517-0735) https://github.com/owlcs/owlapi
